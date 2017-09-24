@@ -22,7 +22,7 @@ void estructura(void)
     R=L/sin(M_PI/8);
     alfa=45; //M_PI/4;
     glScalef(0.25,0.25,0.25);
-    5
+    for(float i=0;i<8;i++)
     {
         glPushMatrix();
         glRotatef(i*alfa,0,0,1);
@@ -32,16 +32,24 @@ void estructura(void)
     }
 }
 
-void superficie(int n)
+void superficie(int n, float paso)
 {
-    float z [n][n];
 
-    for(int i = 0; i < n; i++)
+    for(float i = -n; i < n; i += paso)
     {
-        for(int i = 0; i <= n; i++)
+        glBegin(GL_LINE_STRIP);
+        for(float j = -n; j < n; j += paso)
         {
-
+            glVertex3f(i, j, exp(-i*i) + exp(-j*j));
         }
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+        for(float j = -n; j < n; j += paso)
+        {
+            glVertex3f(j, i, exp(-i*i) + exp(-j*j));
+        }
+        glEnd();
     }
 }
 void display(void)
@@ -61,14 +69,13 @@ void display(void)
         glutWireSphere(1,10,10);
         break;
     case 3:
-        .
         glutWireTorus(0.2,1.5,10,10);
         break;
     case 4:
         estructura();
         break;
     case 5:
-
+        superficie(5,0.3f);
         break;
     }
     glFlush();
@@ -156,7 +163,9 @@ void menu_primi_propia(int opcion)
     case 1:
         modelo=4;
         break;
-//case 2: modelo=5; break; para el cilindro
+    case 2:
+        modelo=5;
+        break;
     }
 }
 void menu_principal(int opcion)
