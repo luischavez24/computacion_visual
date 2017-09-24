@@ -2,7 +2,8 @@
 
 Este es un repositorio del curso de Computación Visual de la UNMSM
 
-## Comando basicos en git
+## Comando basicos en Git
+ Si aun no descargas Git puedes hacerlo [aquí](https://git-scm.com/downloads)
 
 ### Crear nuevo repositorio
 
