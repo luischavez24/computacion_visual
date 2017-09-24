@@ -24,6 +24,16 @@ git commit -m [mensaje]
 
 ### Hacer push a un repositorio 
 ```
-git remote add origin https://github.com/luischavez24/computacion_visual.git
 git push -u origin master
+```
+
+### Clonar un repositorio
+```
+git clone git https://github.com/luischavez24/computacion_visual.git
+```
+
+### Añadir un repositorio local a uno en GitHub
+
+```
+git remote add origin https://github.com/luischavez24/computacion_visual.git
 ```
