@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1446667744 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\sesión 1\laboratorio 1\ejercicio_3\main.cpp
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+
+935113144 c:\program files (x86)\codeblocks\opengl\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+832837944 c:\program files (x86)\codeblocks\opengl\include\gl\gl.h
+
+832394118 c:\program files (x86)\codeblocks\opengl\include\gl\glu.h
+	<GL/gl.h>
+
