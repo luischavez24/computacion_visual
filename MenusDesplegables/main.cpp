@@ -31,23 +31,26 @@ void estructura(void)
         glPopMatrix();
     }
 }
-
-void superficie(int n, float paso)
+float funcion2f(float x, float y)
 {
-
-    for(float i = -n; i < n; i += paso)
+    float z = exp(-x*x) + exp(-y*y);
+    return z;
+}
+void superficie(float a, float b, float paso)
+{
+    for(float i = a; i < b; i += paso)
     {
         glBegin(GL_LINE_STRIP);
-        for(float j = -n; j < n; j += paso)
+        for(float j = a; j <= b; j += paso)
         {
-            glVertex3f(i, j, exp(-i*i) + exp(-j*j));
+            glVertex3f(i, j, funcion2f(i,j));
         }
         glEnd();
 
         glBegin(GL_LINE_STRIP);
-        for(float j = -n; j < n; j += paso)
+        for(float j = a; j < b; j += paso)
         {
-            glVertex3f(j, i, exp(-i*i) + exp(-j*j));
+            glVertex3f(j, i, funcion2f(i,j));
         }
         glEnd();
     }
@@ -75,7 +78,7 @@ void display(void)
         estructura();
         break;
     case 5:
-        superficie(5,0.3f);
+        superficie(-5,5,0.3f);
         break;
     }
     glFlush();
