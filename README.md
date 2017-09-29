@@ -5,7 +5,7 @@ Este es un repositorio del curso de Computación Visual de la UNMSM
 ## Comando basicos en Git
  Si aun no descargas Git puedes hacerlo [aquí](https://git-scm.com/downloads)
 
- ### Clonar un repositorio
+### Clonar un repositorio
   Para poder usar este comando tienes que situarte en una carpeta donde quieres que se guarde el proyecto
 ```
 git clone git https://github.com/luischavez24/computacion_visual.git
@@ -31,8 +31,6 @@ git commit -m [mensaje]
 ```
 git push -u origin master
 ```
-
-
 
 ### Añadir un repositorio local a uno en GitHub
 

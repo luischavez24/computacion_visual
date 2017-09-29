@@ -31,30 +31,51 @@ void estructura(void)
         glPopMatrix();
     }
 }
-float funcion2f(float x, float y)
+
+void superficie(int n, float paso)
 {
-    float z = exp(-x*x) + exp(-y*y);
-    return z;
-}
-void superficie(float a, float b, float paso)
-{
-    for(float i = a; i < b; i += paso)
+
+    for(float i = -n; i < n; i += paso)
     {
         glBegin(GL_LINE_STRIP);
-        for(float j = a; j <= b; j += paso)
+        for(float j = -n; j < n; j += paso)
         {
-            glVertex3f(i, j, funcion2f(i,j));
+            glVertex3f(i, j, exp(-i*i) + exp(-j*j));
         }
         glEnd();
 
         glBegin(GL_LINE_STRIP);
-        for(float j = a; j < b; j += paso)
+        for(float j = -n; j < n; j += paso)
         {
-            glVertex3f(j, i, funcion2f(i,j));
+            glVertex3f(j, i, exp(-i*i) + exp(-j*j));
         }
         glEnd();
     }
 }
+
+void circulo(float radio, int ptos_base, float referencia){
+
+    glBegin(GL_LINE_STRIP);
+        for(float ang = 0; ang <= 2*pi; ang += 2*pi/ptos_base){
+            glVertex3f(radio*sin(ang), referencia, radio*cos(ang));
+        }
+    glEnd();
+}
+
+void cilindro(float radio, float altura, int cant_pto_base){
+
+    circulo(radio, cant_pto_base, -altura/2);
+
+    for(float ang = 0; ang <= 2*pi; ang += 2*pi/cant_pto_base){
+        glBegin(GL_LINE_STRIP);
+            glVertex3f(radio*sin(ang), altura/2, radio*cos(ang));
+            glVertex3f(radio*sin(ang), -altura/2, radio*cos(ang));
+        glEnd();
+    }
+
+    circulo(radio, cant_pto_base, altura/2);
+}
+
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -77,8 +98,11 @@ void display(void)
     case 4:
         estructura();
         break;
+    case 6:
+        superficie(5,0.3f);
+        break;
     case 5:
-        superficie(-5,5,0.3f);
+        cilindro(1, 2.5, 72);
         break;
     }
     glFlush();
@@ -86,7 +110,7 @@ void display(void)
 }
 void CubeSpin()
 {
-    theta[axis] += 0.1;
+    theta[axis] += 0.05;
     if(theta[axis]>360) theta[axis] -= 360.0;
     display();
 }
@@ -169,6 +193,8 @@ void menu_primi_propia(int opcion)
     case 2:
         modelo=5;
         break;
+    case 3:
+        modelo=6;
     }
 }
 void menu_principal(int opcion)
@@ -187,12 +213,13 @@ int main(int argc, char **argv)
     glutInitWindowSize(500,500);
     glutCreateWindow("Modelos Alambricos usando menus jerarquicos con Glut ");
     int submenu_glut=glutCreateMenu(menu_glut);
-    glutAddMenuEntry("cubo",1);
+    glutAddMenuEntry("Cubo",1);
     glutAddMenuEntry("Esfera",2);
     glutAddMenuEntry("Toroide",3);
     int submenu_primi_propia=glutCreateMenu(menu_primi_propia);
-    glutAddMenuEntry("Estructura",1);
-    glutAddMenuEntry("Cilindro",2);
+    glutAddMenuEntry("Estructura", 1);
+    glutAddMenuEntry("Cilindro", 2);
+    glutAddMenuEntry("Función", 3);
     int submenu_modelos_alambricos=glutCreateMenu(menu_modelos_alambricos);
     glutAddSubMenu("Libreria glut",submenu_glut);
     glutAddSubMenu("Libreria propia",submenu_primi_propia);
@@ -208,7 +235,7 @@ int main(int argc, char **argv)
     glutAddSubMenu("Modelos Alambricos",submenu_modelos_alambricos);
     glutAddSubMenu("Rotaciones",submenu_rotaciones);
     glutAddSubMenu("Colores",submenu_color);
-    glutAddMenuEntry("Esc",4);
+    glutAddMenuEntry("Salir",4);
 // usaremos el boton derecho del mouse
     glutAttachMenu(GLUT_RIGHT_BUTTON);
     iniciar();
