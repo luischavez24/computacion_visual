@@ -19,27 +19,16 @@ GLfloat theta = 15, ang = 0, aumento = 0.01, z=0 ,y=0;
 
 int main(int argc, char** argv)
 {
-
     glutInit(&argc,argv);
-
     glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB |GLUT_DEPTH);
-
     glutInitWindowSize(500,500);
-
     glutInitWindowPosition(100,100);
-
     glutCreateWindow(argv[0]);
-
     init();
-
     glutDisplayFunc(display);
-
-    glutIdleFunc(oscilacion);
-
+    glutIdleFunc(oscilacion);    ///va a estar oscilando siempre
     glutReshapeFunc(reshape);
-
     glEnable(GL_DEPTH_TEST);
-
     glutMainLoop();
 
     return 0;
@@ -47,22 +36,17 @@ int main(int argc, char** argv)
 
 void init(void)
 {
-
     glClearColor(1.0,1.0,1.0,0.0);
-
     glShadeModel(GL_FLAT);
-
     glLineWidth(1.5);
-
     glPointSize(3.0);
-
     glColor3f(1.0,0.0,0.0);
-
 }
 
 void display(void)
 {
     GLfloat cam_x=1.5, cam_y = 1, cam_z = 1, lejos=3;
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -83,15 +67,10 @@ void reshape(int w, int h)
 {
 
     glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-
     glMatrixMode(GL_PROJECTION);
-
     glLoadIdentity();
-
     glOrtho(-10.0, 10.0, -10.0, 10, -10.0, 10.0);
-
     glMatrixMode(GL_MODELVIEW);
-
     glLoadIdentity();
 
 }
@@ -134,7 +113,7 @@ void dibujarEjes()
     glEnd();
 }
 
-void oscilacion(){
+void oscilacion(){   ///variables globale del Idle
     //printf("(0, %.2f, % .2f)\n", y, z);
     z = 20*cos(ang * (PI/180));
     y = 20*sin(ang * (PI/180)) + 20;

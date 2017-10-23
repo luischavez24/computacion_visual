@@ -16,37 +16,28 @@ void idleFunc();
 void regionCircuferencia(GLfloat aInit,GLfloat aEnd, GLfloat cx, GLfloat cy, GLfloat r);
 void espacio(GLfloat width, GLfloat heigth);
 void dibujarOjo(float x, float y);
+
+GLfloat w = 16, h = 10, radio = 0.5, x_av = - w/2 + radio, y_av = 0, ang = 145, rot_x= 1, rot_y= 1;
+GLfloat angulo_boca = 90;
+GLfloat r = 1, g = 1, b = 0;   //colores
+
 float convertirGrados(float degree)
 {
     return (GL_PI/180) * degree;
 }
-GLfloat w = 16, h = 10, radio = 0.5, x_av = - w/2 + radio, y_av = 0, ang = 145, rot_x= 1, rot_y= 1;
-GLfloat angulo_boca = 90;
-GLfloat r = 1, g = 1, b = 0;
 
 int main(int argc, char** argv)
 {
-
     glutInit(&argc,argv);
-
     glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB |GLUT_DEPTH);
-
     glutInitWindowSize(WIDTH,HEIGTH);
-
     glutInitWindowPosition(100,100);
-
     glutCreateWindow(argv[0]);
-
     init();
-
     glutDisplayFunc(display);
-
     glutIdleFunc(idleFunc);
-
     glutReshapeFunc(reshape);
-
     glEnable(GL_DEPTH_TEST);
-
     glutMainLoop();
 
     return 0;
@@ -54,17 +45,11 @@ int main(int argc, char** argv)
 
 void init(void)
 {
-
     glClearColor(0.0,0.0,0.0,0.0);
-
     glShadeModel(GL_FLAT);
-
     glLineWidth(1.5);
-
     glPointSize(3.0);
-
     glColor3f(1.0,0.0,0.0);
-
 }
 
 void display(void)
@@ -73,7 +58,6 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glLoadIdentity();
-    //gluLookAt(cam_x*lejos,cam_y*lejos,cam_z*lejos,0,0,0,0,1,0);
     espacio(w, h);
     glPushMatrix();
         //glTranslatef(x_av, y_av, 0);
@@ -85,17 +69,11 @@ void display(void)
 
 void reshape(int w, int h)
 {
-
     glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-
     glMatrixMode(GL_PROJECTION);
-
     glLoadIdentity();
-
     glOrtho(-10.0, 10.0, -10.0, 10, -10.0, 10.0);
-
     glMatrixMode(GL_MODELVIEW);
-
     glLoadIdentity();
 
 }
@@ -108,6 +86,7 @@ void dibujarOjo(float x, float y)
     glEnd();
     glLineWidth(1);
 }
+
 void dibujarEjes()
 {
     glColor3f(1.0,0.0,0.0);

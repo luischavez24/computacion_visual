@@ -1,11 +1,13 @@
+/*
 #include <stdlib.h>
 #include<conio.h>
 #include<stdio.h>
 #include<math.h>
 #include <gl/glut.h>
 #define PI 3.1415926
+
 void ejes(int);
-GLdouble angulo=0, incremento_angulo=0.1;
+GLdouble angulo=0, incremento_angulo=0.1;  //variables globales para el IdleFunc
 GLdouble const radio=0.5;
 GLfloat px0=0,py0=0,pz0=5;
 GLfloat px1=0,py1=0,pz1=4;
@@ -19,9 +21,10 @@ void iniciar(void)
     glClearColor (1.0, 1.0, 1.0, 0.0);
     glShadeModel (GL_FLAT);
 }
+
 void orbita_lunar(GLfloat a, GLfloat b)
 {
-    e = sqrt(1 - pow(b,2)/pow(a,2));
+    e = sqrt(1 - pow(b,2)/pow(a,2));    ///ecuación de la elipse
     GLfloat x, z, r;
     bLuna = b;
     glColor3f(0.0, 0.0, 0.0);
@@ -36,16 +39,14 @@ void orbita_lunar(GLfloat a, GLfloat b)
     }
     glEnd();
 }
+
 void tierra_luna()
 {
-
-    /*glRotatef(theta[0],1.0,0.0,0.0);
-    glRotatef(theta[1],0.0,1.0,0.0);
-    glRotatef(theta[2],0.0,0.0,1.0);*/
-    glRotatef(45,1.0,0.0,0.0);
+    glRotatef(45,1.0,0.0,0.0);    //rotacion en el eje x para que se visualice
     glPushMatrix();
         orbita_lunar(8.0f,4.0f);
     glPopMatrix();
+
     glPushMatrix();
         glColor3f (0.0, 0.0, 1.0);
         glRotatef(theta[1],0.0,1.0,0.0);
@@ -59,37 +60,46 @@ void tierra_luna()
         glRotatef(theta[1],0.0,1.0,0.0);
         glRotatef(90,1.0,0.0,0.0);
         glutWireSphere(0.2,18,18);
-
     glPopMatrix();
 }
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPushMatrix();
     glLoadIdentity();
+    glPushMatrix();
+
 // la camara se desplaza sobre el plano xz
     gluLookAt(px0,0.0,pz0,px1,0.0,pz1,0,1,0);
     glColor3f (1.0, 0.0, 0.0);
-    ejes(2);
+    ejes(3);
 
     //glutWireDodecahedron();
     tierra_luna();
+
     glFlush();
     glPopMatrix();
+
     glutSwapBuffers();
 }
-void CubeSpin()
+void CubeSpin()   //Función Idle
 {
     rp = bLuna/sqrt(1 - pow(e*cos(aLuna),2));
     xLuna = rp * cos(aLuna);
     zLuna = rp * sin(aLuna);
     aLuna += 0.001;
-    if(aLuna >= 2*PI) aLuna -= 2*PI;
+    if(aLuna >= 2*PI)
+        aLuna -= 2*PI;
 
-    theta[axis] += 0.1;
-    if(theta[axis]>360) theta[axis] -= 360.0;
+    //para la luna
+    theta[axis] += 0.01;
+    if(theta[axis]>360)
+        theta[axis] -= 360.0;
+
+    //para la tierra
     theta2[axis] += 0.04;
-    if(theta2[axis]>360) theta2[axis] -= 360.0;
+    if(theta2[axis]>360)
+        theta2[axis] -= 360.0;
+
     display();
 }
 
@@ -98,6 +108,7 @@ void rotacamara()
     px1=px0+radio*sin(angulo);
     pz1=pz0-radio*cos(angulo);
 }
+
 void avanza()
 {
     px0=px1;
@@ -116,34 +127,26 @@ void teclado(unsigned char tecla,int x,int y)
 {
     switch(tecla)
     {
-    case 'i' :
+    case 'a' :
         avanza();
         break;
-    case 'm' :
+    case 'r' :
         retro();
         break;
-    case 'j' :
+    case 'i' :
         angulo=angulo+incremento_angulo;
         rotacamara();
         break;
-    case 'k' :
+    case 'd' :
         angulo=angulo-incremento_angulo;
         rotacamara();
         break;
-    /*case 'a' :
-        axis = 0;
-        break;
-    case 's' :
-        axis = 1;
-        break;
-    case 'd' :
-        axis = 2;
-        break;*/
-    case 'f' :
+    case 'q' :
         exit(0);
         break;
     }
 }
+
 void ejes(int longitud)
 {
     glBegin(GL_LINES);
@@ -183,3 +186,8 @@ int main(int argc, char **argv)
     glutMainLoop();
     return 0;
 }
+*/
+
+
+
+
