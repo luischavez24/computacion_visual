@@ -5,13 +5,19 @@
 	<gl/glut.h>
 	<stdio.h>
 
-935113144 c:\program files (x86)\codeblocks\opengl\include\gl\glut.h
+935111344 c:\program files (x86)\codeblocks\opengl\include\gl\glut.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
 
-832837944 c:\program files (x86)\codeblocks\opengl\include\gl\gl.h
+832836144 c:\program files (x86)\codeblocks\opengl\include\gl\gl.h
 
-832394118 c:\program files (x86)\codeblocks\opengl\include\gl\glu.h
+832392318 c:\program files (x86)\codeblocks\opengl\include\gl\glu.h
 	<GL/gl.h>
+
+1506749503 source:c:\users\lupita\documents\repositorio git\proyectos opengl\computacion_visual\transformaciones_geometricas\main.cpp
+	<stdlib.h>
+	<conio.h>
+	<gl/glut.h>
+	<stdio.h>
 

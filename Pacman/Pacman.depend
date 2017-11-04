@@ -1,17 +1,23 @@
 # depslib dependency file v1.0
+
 1506733678 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\workspace\pacman\main.cpp
+
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
 	<GL/glut.h>
 
+
 935113144 c:\program files (x86)\codeblocks\opengl\include\gl\glut.h
+
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
 
-832837944 c:\program files (x86)\codeblocks\opengl\include\gl\gl.h
 
-832394118 c:\program files (x86)\codeblocks\opengl\include\gl\glu.h
+832836144 c:\program files (x86)\codeblocks\opengl\include\gl\gl.h
+
+832392318 c:\program files (x86)\codeblocks\opengl\include\gl\glu.h
+
 	<GL/gl.h>
 

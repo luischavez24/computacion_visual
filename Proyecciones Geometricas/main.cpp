@@ -3,13 +3,16 @@
 #include<stdio.h>
 #include<math.h>
 #include <gl/glut.h>
+
 void ejes(int);
+
 GLdouble angulo=0, incremento_angulo=0.1;
 GLdouble const radio=0.5;
 GLfloat px0=0,py0=0,pz0=5;
 GLfloat px1=0,py1=0,pz1=4;
 static GLfloat theta[] = {0.0,0.0,0.0};
 static GLint axis = 2 ;
+
 void iniciar(void)
 {
     glClearColor (1.0, 1.0, 1.0, 0.0);
@@ -26,9 +29,8 @@ void estructura1()
             glutWireCube(1);
         glPopMatrix();
     }
-
-
 }
+
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -38,19 +40,21 @@ void display(void)
     gluLookAt(px0,0.0,pz0,px1,0.0,pz1,0,1,0);
     glColor3f (1.0, 0.0, 0.0);
     ejes(2);
+  //rota en los 3 ejes
     glRotatef(theta[0],1.0,0.0,0.0);
     glRotatef(theta[1],0.0,1.0,0.0);
     glRotatef(theta[2],0.0,0.0,1.0);
+
     glColor3f (0.0, 0.0, 1.0);
     //glutWireDodecahedron();
-    estructura1();
+    estructura1();   //librería propia
     glFlush();
     glPopMatrix();
     glutSwapBuffers();
 }
 void CubeSpin()
 {
-    theta[axis] += 0.1;
+    theta[axis] += 0.2;
     if(theta[axis]>360) theta[axis] -= 360.0;
     display();
 }
@@ -78,30 +82,30 @@ void teclado(unsigned char tecla,int x,int y)
 {
     switch(tecla)
     {
-    case 'i' :
+    case 'a' :
         avanza();
         break;
-    case 'm' :
+    case 'r' :
         retro();
         break;
-    case 'j' :
+    case 'i' :
         angulo=angulo+incremento_angulo;
         rotacamara();
         break;
-    case 'k' :
+    case 'd' :
         angulo=angulo-incremento_angulo;
         rotacamara();
         break;
-    case 'a' :
+    case 'x' :
         axis = 0;
         break;
-    case 's' :
+    case 'y' :
         axis = 1;
         break;
-    case 'd' :
+    case 'z' :
         axis = 2;
         break;
-    case 'f' :
+    case 'q' :
         exit(0);
         break;
     }
@@ -130,12 +134,13 @@ void myReshape(int w, int h)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(500,500);
-    glutCreateWindow("Sistema Planetario");
+    glutCreateWindow("Estructura-labo3");
     iniciar();
     glutReshapeFunc(myReshape);
     glutDisplayFunc(display);

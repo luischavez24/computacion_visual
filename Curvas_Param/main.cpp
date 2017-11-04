@@ -15,34 +15,22 @@ void regionCircuferencia(GLfloat aInit, GLfloat cx, GLfloat cy, GLfloat r);
 int main(int argc, char** argv) {
 
     glutInit(&argc,argv);
-
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
-
     glutInitWindowSize(500,500);
-
     glutInitWindowPosition(100,100);
-
     glutCreateWindow(argv[0]);
-
     init();
-
     glutDisplayFunc(display);
-
     glutReshapeFunc(reshape);
-
     glutMainLoop();
-
     return 0;
 }
 
 void init(void) {
 
     glClearColor(1.0,1.0,1.0,0.0);
-
     glShadeModel(GL_FLAT);
-
     glLineWidth(1.5);
-
     glPointSize(3.0);
 }
 
@@ -54,7 +42,7 @@ void display(void) {
     ejes(l);
     glBegin(GL_LINE_STRIP);
     glPushMatrix();
-    glColor3f(0.0,0.0,0.5);
+    glColor3f(0.5,0.0,0.5);
 
     for(int i = 0; i < 7; i++) {
         r += l;
@@ -66,7 +54,6 @@ void display(void) {
     }
 
     glPopMatrix();
-
     glEnd();
 
     glFlush();
@@ -79,8 +66,7 @@ void reshape(int w, int h) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-10.0, 10.0, -10.0, 10, -10.0, 10.0);
-    glMatrixMode
-    (GL_MODELVIEW);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
 }
@@ -126,3 +112,5 @@ void ejes(GLfloat l) {
     glPopMatrix();
     glEnd();
 }
+
+
