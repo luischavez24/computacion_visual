@@ -11,18 +11,14 @@ void init(void);
 void display(void);
 void reshape(int,int);
 void dibujarEjes();
-void dibujarPendulo(GLfloat, GLfloat, GLfloat, GLfloat);
 void idleFunc();
 void regionCircuferencia(GLfloat aInit,GLfloat aEnd, GLfloat cx, GLfloat cy, GLfloat r);
 void espacio(GLfloat width, GLfloat heigth);
-void dibujarOjo(float x, float y);
-float convertirGrados(float degree)
-{
-    return (GL_PI/180) * degree;
-}
-GLfloat w = 16, h = 10, radio = 0.5, x_av = - w/2 + radio, y_av = 0, ang = 145, rot_x= 1, rot_y= 1;
-GLfloat angulo_boca = 90;
-GLfloat r = 0, g = 1, b = 0;
+float convertirGrados(float degree);
+void key_func(unsigned char, int, int);
+
+// Variables globales
+GLfloat x = 7, y = 2, z = 5, ang = 0;
 
 int main(int argc, char** argv)
 {
@@ -42,6 +38,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);
 
     glutIdleFunc(idleFunc);
+
+    glutKeyboardFunc(key_func);
 
     glutReshapeFunc(reshape);
 
@@ -63,23 +61,19 @@ void init(void)
 
     glPointSize(3.0);
 
-    glColor3f(1.0,0.0,0.0);
-
 }
 
 void display(void)
 {
-    //GLfloat cam_x=1.5, cam_y = 1, cam_z = 1, lejos=3;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glLoadIdentity();
-    //gluLookAt(cam_x*lejos,cam_y*lejos,cam_z*lejos,0,0,0,0,1,0);
-    espacio(w, h);
-    glPushMatrix();
-        //glTranslatef(x_av, y_av, 0);
-        dibujarOjo(0.1+x_av,0.25+y_av);
-        regionCircuferencia(convertirGrados(angulo_boca/2),convertirGrados(360-angulo_boca/2),x_av,y_av,radio);
-    glPopMatrix();
+
+    gluLookAt(x,y,z,1,1,1,0,1,0);
+    dibujarEjes();
+    glColor3f(1,1,0);
+    glutWireCube(2);
+    //glutWireTeapot(2);
     glutSwapBuffers();
 }
 
@@ -99,15 +93,16 @@ void reshape(int w, int h)
     glLoadIdentity();
 
 }
-void dibujarOjo(float x, float y)
-{
-    glColor3f(0,0,0);
-    glLineWidth(4.5);
-    glBegin(GL_POINTS);
-        glVertex3f(x,y,0);
-    glEnd();
-    glLineWidth(1);
+
+
+// Idle Func
+void idleFunc(){
+    z = sqrt(7*7 + 5*5) * cos(ang);
+    x = sqrt(7*7 + 5*5)  * sin(ang);
+    display();
 }
+
+// Primitivas graficas
 void dibujarEjes()
 {
     glColor3f(1.0,0.0,0.0);
@@ -120,6 +115,7 @@ void dibujarEjes()
         glVertex3f(0.0,0.0,0.0);
         glVertex3f(0.0,20.0,0.0);
     glEnd();
+
     glBegin(GL_LINE_STRIP);
     glColor3f(0.0,1.0,0.0);
         glVertex3f(0.0,0.0,0.0);
@@ -127,54 +123,45 @@ void dibujarEjes()
     glEnd();
 }
 
+void key_func(unsigned char tecla, int x, int y)
+{
+    switch(tecla)
+    {
+    case 'a':
+        printf("Izquierda \n");
+        ang += 0.1;
+        break;
+    case 'd':
+        ang -= 0.1;
+        printf("Derecha \n");
+        break;
+    }
+}
 float recta(float angulo_inclinacion, float x, float x0, float y0)
 {
     return (tan(convertirGrados(angulo_inclinacion))) * (x - x0) + y0;
 }
 
-GLfloat dx = 0.0025, dy = recta(ang,-w/2 + radio,- w/2 + radio, 0.5) - recta(ang, -w/2 + radio - dx,- w/2 + radio, 0.5);
-GLfloat aumento_boca = 0.05;
-
-// Idle Func
-void idleFunc(){
-
-    x_av += dx * rot_x;
-    y_av += dy * rot_y;
-
-    if(y_av >= h/2-radio || y_av <= -h/2 + radio)
-    {
-        rot_y*= -1;
-        r = 0;
-        g = 0;
-        b = 1;
-
-    }
-    else if(x_av >= w/2-radio || x_av <= -w/2 + radio)
-    {
-        rot_x*=-1;
-        r = 0;
-        g = 1;
-        b = 0;
-    }
-    if(angulo_boca >= 90 || angulo_boca <= 0){
-        aumento_boca *= -1;
-    }
-    angulo_boca += aumento_boca;
-
-    display();
-}
-
-void regionCircuferencia(GLfloat aInit,GLfloat aEnd, GLfloat cx, GLfloat cy, GLfloat r) {
-    glBegin(GL_POLYGON);
-        glColor3f(r,g,b);
+void regionCircuferencia(GLfloat aInit,GLfloat aEnd, GLfloat cx, GLfloat cy, GLfloat r)
+{
+    glBegin(GL_LINE_STRIP);
+        //glColor3f(r,g,b);
         GLfloat ang, x, y;
-        glVertex3f(cx - 0.2, cy, 0);
         for(ang = aInit; ang  <= aEnd ; ang += 2*GL_PI/80) {
             x = r * cos(-ang) + cx;
             y = r * sin(-ang) + cy;
             glVertex2f(x,y);
         }
-        glVertex3f(cx-0.2, cy, 0);
+    glEnd();
+
+    glBegin(GL_LINE_STRIP);
+        glVertex3f(r*cos(aInit)+cx, r*sin(aInit)+cy,0);
+        glVertex3f(cx, cy, 0);
+    glEnd();
+
+    glBegin(GL_LINE_STRIP);
+        glVertex3f(r*cos(aEnd)+cx , r*sin(aEnd)+cy,0);
+        glVertex3f(cx, cy, 0);
     glEnd();
 }
 
@@ -190,3 +177,7 @@ void espacio(GLfloat width, GLfloat heigth)
     glEnd();
 }
 
+float convertirGrados(float degree)
+{
+    return (GL_PI/180) * degree;
+}

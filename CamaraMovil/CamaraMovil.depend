@@ -1,10 +1,9 @@
 # depslib dependency file v1.0
-1506647621 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\workspace\menusdesplegables\main.cpp
+1506751707 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\workspace\camaramovil\main.cpp
 	<stdlib.h>
-	<conio.h>
 	<stdio.h>
 	<math.h>
-	<gl/glut.h>
+	<GL/glut.h>
 
 935113144 c:\program files (x86)\codeblocks\opengl\include\gl\glut.h
 	<windows.h>

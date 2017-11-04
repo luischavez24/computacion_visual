@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1509745330 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\workspace\curvasbezier\main.cpp
+
+935113144 c:\program files (x86)\codeblocks\opengl\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+832837944 c:\program files (x86)\codeblocks\opengl\include\gl\gl.h
+
+832394118 c:\program files (x86)\codeblocks\opengl\include\gl\glu.h
+	<GL/gl.h>
+
+1509745567 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\workspace\curvasbezier\ej3.cpp
+	<stdlib.h>
+	<GL/glut.h>
+	<stdio.h>
+	<conio.h>
+	<math.h>
+
+1509742726 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\workspace\curvasbezier\ej2.cpp
+	<stdlib.h>
+	<GL/glut.h>
+	<stdio.h>
+	<conio.h>
+	<math.h>
+
+1509755423 source:c:\users\lucho\documents\ing. de sistemas\ciclo vi\computación visual\workspace\curvasbezier\ej4.cpp
+	<stdlib.h>
+	<GL/glut.h>
+	<stdio.h>
+	<conio.h>
+	<math.h>
+	<iostream>
+

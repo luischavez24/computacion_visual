@@ -10,6 +10,8 @@ GLdouble const radio=1.0;
 static GLfloat theta[] = {0.0,0.0,0.0};
 static GLint axis = 2 ;
 GLfloat L=1.5,R,alfa;
+
+
 void iniciar(void)
 {
     glClearColor (1.0, 1.0, 1.0, 0.0);
@@ -62,18 +64,44 @@ void circulo(float radio, int ptos_base, float referencia){
     glEnd();
 }
 
-void cilindro(float radio, float altura, int cant_pto_base){
+void cilindro(int nCortes, int nPara){
+    float radio =1, altura=2;
 
-    circulo(radio, cant_pto_base, -altura/2);
+    for(float h = -altura/2; h <= altura/2; h += altura/nPara){
+        circulo(radio, nCortes, h);
+    }
 
-    for(float ang = 0; ang <= 2*pi; ang += 2*pi/cant_pto_base){
+
+    for(float ang = 0; ang <= 2*pi; ang += 2*pi/nCortes){
         glBegin(GL_LINE_STRIP);
             glVertex3f(radio*sin(ang), altura/2, radio*cos(ang));
             glVertex3f(radio*sin(ang), -altura/2, radio*cos(ang));
         glEnd();
     }
+}
 
-    circulo(radio, cant_pto_base, altura/2);
+void circulo_relleno(float radio, int ptos_base, float referencia){
+
+    glBegin(GL_POLYGON);
+        for(float ang = 0; ang <= 2*pi; ang += 2*pi/ptos_base){
+            glVertex3f(radio*sin(ang), referencia, radio*cos(ang));
+        }
+    glEnd();
+}
+
+void cilindro_relleno(int nCortes, int nPara){
+    float radio =1, altura=2, paso = 2*pi/nCortes;
+    circulo_relleno(radio, nCortes, -altura/2);
+    circulo_relleno(radio, nCortes, altura/2);
+    for(float ang = 0; ang <= 2*pi; ang += paso){
+        glBegin(GL_POLYGON);
+            glVertex3f(radio*sin(ang), altura/2, radio*cos(ang));
+            glVertex3f(radio*sin(ang + paso), altura/2, radio*cos(ang + paso));
+            glVertex3f(radio*sin(ang + paso), -altura/2, radio*cos(ang + paso));
+            glVertex3f(radio*sin(ang), -altura/2, radio*cos(ang));
+            glVertex3f(radio*sin(ang), altura/2, radio*cos(ang));
+        glEnd();
+    }
 }
 
 void display(void)
@@ -102,7 +130,8 @@ void display(void)
         superficie(5,0.3f);
         break;
     case 5:
-        cilindro(1, 2.5, 72);
+        //cilindro(72,50);
+        cilindro_relleno(10,15);
         break;
     }
     glFlush();
