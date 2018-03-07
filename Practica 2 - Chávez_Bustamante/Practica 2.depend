@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1446667744 source:c:\users\videoteca\desktop\practica 2\main.cpp
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+
+935111344 c:\program files (x86)\codeblocks\opengl\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+832836144 c:\program files (x86)\codeblocks\opengl\include\gl\gl.h
+
+832392318 c:\program files (x86)\codeblocks\opengl\include\gl\glu.h
+	<GL/gl.h>
+
+1511024406 source:e:\practica 2\main.cpp
+	<stdlib.h>
+	<conio.h>
+	<gl/glut.h>
+	<stdio.h>
+
+1511024406 source:c:\users\lupita\desktop\practica 2\main.cpp
+	<stdlib.h>
+	<conio.h>
+	<gl/glut.h>
+	<stdio.h>
+
+1511024406 source:d:\unmsm\ciclo vi\compu\practica 2\main.cpp
+	<stdlib.h>
+	<conio.h>
+	<gl/glut.h>
+	<stdio.h>
+
+1511024406 source:d:\unmsm\ciclo vi\compu\practica 2 - chávez_bustamante\main.cpp
+	<stdlib.h>
+	<conio.h>
+	<gl/glut.h>
+	<stdio.h>
+
